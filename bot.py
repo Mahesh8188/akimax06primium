@@ -20,7 +20,7 @@ logging.basicConfig(
 logging.getLogger("aiohttp").setLevel(logging.ERROR)
 logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
-
+from pyrogram.types import ChatMemberUpdated
 from pyrogram import __version__
 from pyrogram.raw.all import layer
 from database.ia_filterdb import Media
@@ -56,7 +56,23 @@ def load_allowed_groups():
 def save_allowed_groups(groups):
     with open("allowed_groups.json", "w") as f:
         json.dump(groups, f)
-        
+
+@app.on_chat_member_updated()
+async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
+    chat = chat_member_update.chat
+    new_status = chat_member_update.new_chat_member.status
+    old_status = chat_member_update.old_chat_member.status
+
+    if old_status in ("left", "kicked") and new_status in ("member", "administrator"):
+        chat_id = chat.id
+        groups = load_allowed_groups()
+        if chat_id not in groups:
+            try:
+                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                await client.leave_chat(chat_id)
+            except Exception as e:
+                print(f"Error: {e}")
+                
 async def Jisshu_start():
     print("\n")
     print("Credit - Telegram @JISSHU_BOTS")
