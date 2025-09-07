@@ -12,16 +12,16 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
 
 # === MongoDB Setup ===
-MONGO_URL = "mongodb+srv://user:pass@cluster.mongodb.net/mydb"
+MONGO_URL = "mongodb+srv://devashibambhava0:devashibambhava0@cluster0.ux6amy9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongo_client = MongoClient(MONGO_URL)
-db = mongo_client["user_database"]   # <-- yaha apna user DB daalna
+db = mongo_client["Cluster0"]   # <-- yaha apna user DB daalna
 premium_col = db["premium_movies"]
 
 # Fixed poster (aap apna link daalo yaha 👇)
-FIXED_POSTER = "https://link-to-your-premium-poster.jpg"
+FIXED_POSTER = "https://envs.sh/i6E.jpg"
 
 # === Command: Set Premium Movie ===
-@Client.on_message(filters.command("setpremium") & filters.user([123456789]))  # admin id daalna
+@Client.on_message(filters.command("setpremium") & filters.user([ADMINS]))  # admin id daalna
 async def set_premium_movie(client, message):
     args = message.text.split(" ", 1)
     if len(args) < 2:
@@ -39,7 +39,7 @@ async def set_premium_movie(client, message):
 
 
 # === Command: Remove Premium Movie ===
-@Client.on_message(filters.command("removepremium") & filters.user([123456789]))
+@Client.on_message(filters.command("removepremium") & filters.user([ADMINS]))
 async def remove_premium_movie(client, message):
     args = message.text.split(" ", 1)
     if len(args) < 2:
