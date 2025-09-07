@@ -5,6 +5,9 @@ from pathlib import Path
 from pyrogram import idle
 import logging
 import logging.config
+import json
+from info import OWNER_ID
+
 
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
@@ -43,6 +46,17 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
+def load_allowed_groups():
+    try:
+        with open("allowed_groups.json", "r") as f:
+            return json.load(f)
+    except:
+        return []
+
+def save_allowed_groups(groups):
+    with open("allowed_groups.json", "w") as f:
+        json.dump(groups, f)
+        
 async def Jisshu_start():
     print("\n")
     print("Credit - Telegram @JISSHU_BOTS")
