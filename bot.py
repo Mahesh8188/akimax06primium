@@ -123,6 +123,21 @@ async def Jisshu_start():
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
+@JisshuBot.on_chat_member_updated()
+async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
+    # Bot khud add hua hai kya check karo
+    if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
+        chat_id = chat_member_update.chat.id
+        groups = load_allowed_groups()
+        if chat_id not in groups:
+            try:
+                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                await client.leave_chat(chat_id)
+            except Exception as e:
+                print(f"Error: {e}")
+        else:
+            await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
+        
 
 if __name__ == "__main__":
     try:
