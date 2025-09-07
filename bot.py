@@ -57,7 +57,7 @@ def save_allowed_groups(groups):
     with open("allowed_groups.json", "w") as f:
         json.dump(groups, f)
 
-@app.on_chat_member_updated()
+@JisshuBot.on_chat_member_updated()
 async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
     chat = chat_member_update.chat
     new_status = chat_member_update.new_chat_member.status
