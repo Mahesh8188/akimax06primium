@@ -5,6 +5,7 @@ import random
 import asyncio
 import string
 import pytz
+from pyrogram import filters
 from datetime import datetime as dt
 from Script import script
 from pyrogram import Client, filters, enums
@@ -48,6 +49,20 @@ movie_series_db = JsTopDB(DATABASE_URI)
 verification_ids = {}
 
 
+@app.on_message(filters.command("allow") & filters.user(OWNER_ID))
+async def allow_group(client, message):
+    try:
+        group_id = int(message.text.split(" ", 1)[1])  # /allow -1001234567890
+        groups = load_allowed_groups()
+        if group_id not in groups:
+            groups.append(group_id)
+            save_allowed_groups(groups)
+            await message.reply_text(f"✅ Group {group_id} ab allowed hai.")
+        else:
+            await message.reply_text("⚠️ Ye group pehle se allowed hai.")
+    except Exception as e:
+        await message.reply_text("❌ Format galat hai.\nUse: `/allow -1001234567890`")
+                          
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message):
     await message.react(emoji=random.choice(REACTIONS))
@@ -1547,3 +1562,4 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
