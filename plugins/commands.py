@@ -49,21 +49,17 @@ logger = logging.getLogger(__name__)
 movie_series_db = JsTopDB(DATABASE_URI)
 verification_ids = {}
 
-
 @Client.on_message(filters.command("allow") & filters.user(OWNER_ID))
-async def allow(client, message):
-    try:
-        group_id = temp.CHAT.get(user_id, 0)
-        groups = load_allowed_groups()
-        if group_id not in groups:
-            groups.append(group_id)
-            save_allowed_groups(groups)
-            await message.reply(f"✅ Group {group_id} ab allowed hai.")
-        else:
-            await message.reply("⚠️ Ye group pehle se allowed hai.")
-    except Exception as e:
-        await message.reply("❌ Format galat hai.\nUse: `/allow -1001234567890`")
-                          
+async def allow_group(client, message):
+    groups = load_allowed_groups()
+    chat_id = message.chat.id
+    if chat_id not in groups:
+        groups.append(chat_id)
+        save_allowed_groups(groups)
+        await message.reply("✅ This group is now allowed for the bot.")
+    else:
+        await message.reply("⚠️ Ye group already allowed hai.")
+            
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message):
     await message.react(emoji=random.choice(REACTIONS))
@@ -1563,6 +1559,7 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
 
 
 
