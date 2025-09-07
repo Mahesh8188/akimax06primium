@@ -5,9 +5,6 @@ from pathlib import Path
 from pyrogram import idle
 import logging
 import logging.config
-import json
-from info import OWNER_ID
-
 
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
@@ -46,9 +43,6 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
-
-
-                
 async def Jisshu_start():
     print("\n")
     print("Credit - Telegram @JISSHU_BOTS")
@@ -61,50 +55,50 @@ async def Jisshu_start():
             plugin_name = patt.stem.replace(".py", "")
             plugins_dir = Path(f"plugins/{plugin_name}.py")
             import_path = "plugins.{}".format(plugin_name)
-            spec from pyrogram import Client, filters
-from pyrogram.types import ChatMemberUpdated
+            spec = importlib.util.spec_from_file_location(import_path, plugins_dir)
+            load = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(load)
+            sys.modules["plugins." + plugin_name] = load
+            print("JisshuBot Imported => " + plugin_name)
+    if ON_HEROKU:
+        asyncio.create_task(ping_server())
+    b_users, b_chats = await db.get_banned()
+    temp.BANNED_USERS = b_users
+    temp.BANNED_CHATS = b_chats
+    await Media.ensure_indexes()
+    me = await JisshuBot.get_me()
+    temp.ME = me.id
+    temp.U_NAME = me.username
+    temp.B_NAME = me.first_name
+    temp.B_LINK = me.mention
+    JisshuBot.username = "@" + me.username
+    JisshuBot.loop.create_task(check_expired_premium(JisshuBot))
+    logging.info(
+        f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}."
+    )
+    logging.info(script.LOGO)
+    tz = pytz.timezone("Asia/Kolkata")
+    today = date.today()
+    now = datetime.now(tz)
+    time = now.strftime("%H:%M:%S %p")
+    await JisshuBot.send_message(
+        chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(me.mention, today, time)
+    )
+    await JisshuBot.send_message(
+        chat_id=SUPPORT_GROUP, text=f"<b>{me.mention} ʀᴇsᴛᴀʀᴛᴇᴅ 🤖</b>"
+    )
+    app = web.AppRunner(await web_server())
+    await app.setup()
+    bind_address = "0.0.0.0"
+    await web.TCPSite(app, bind_address, PORT).start()
+    await idle()
 
-# apna OWNER ID yaha dalna
-OWNER_ID = 1234567890  
 
-# =========================
-# Event 1: Chat Member Updated (Bot Added/Removed)
-# =========================
-@Client.on_chat_member_updated()
-async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
+if __name__ == "__main__":
     try:
-        if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
-            chat_id = chat_member_update.chat.id
-            adder_id = chat_member_update.from_user.id if chat_member_update.from_user else None
-
-            groups = load_allowed_groups()
-
-            # ✅ Agar OWNER ne add kiya hai to allow
-            if adder_id == OWNER_ID:
-                await client.send_message(chat_id, "✅ Bot owner ne mujhe add kiya hai. Main yaha rahunga!")
-                if chat_id not in groups:
-                    groups.append(chat_id)
-                    save_allowed_groups(groups)
-            else:
-                if chat_id not in groups:
-                    await client.send_message(chat_id, "🚫 Suno Group ke Logo, is group ka owner bawasir hai... asli AK IMAX join karo @akimax06")
-                    await client.leave_chat(chat_id)
-                else:
-                    await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
-    except Exception as e:
-        print(f"Error in on_chat_member_updated: {e}")
-
-# =========================
-# Event 2: New Chat Members (Fallback)
-# =========================
-@Client.on_message(filters.new_chat_members)
-async def when_added(client, message):
-    try:
-        for user in message.new_chat_members:
-            if user.id == client.me.id:  # Bot khud add hua hai
-                chat_id = message.chat.id
-                adder_id = message.from_user.id if message.from_user else None
-
+        loop.run_until_complete(Jisshu_start())
+    except KeyboardInterrupt:
+        logging.info("Service Stopped Bye 👋")
                 groups = load_allowed_groups()
 
                 # ✅ Agar OWNER ne add kiya hai to allow
