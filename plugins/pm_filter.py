@@ -88,6 +88,11 @@ async def pm_search(client, message):
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def group_search(client, message):
+    # Premium movie check
+query = message.text.strip()
+if await check_premium_movie(query, message):
+    return  # agar premium hai to normal search skip
+    
     # await message.react(emoji=random.choice(REACTIONS))
     await mdb.update_top_messages(message.from_user.id, message.text)
     user_id = message.from_user.id if message.from_user else None
