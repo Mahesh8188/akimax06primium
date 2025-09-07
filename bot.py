@@ -20,7 +20,7 @@ logging.basicConfig(
 logging.getLogger("aiohttp").setLevel(logging.ERROR)
 logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
-from pyrogram.types import ChatMemberUpdated
+
 from pyrogram import __version__
 from pyrogram.raw.all import layer
 from database.ia_filterdb import Media
