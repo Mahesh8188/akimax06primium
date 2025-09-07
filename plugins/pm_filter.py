@@ -59,6 +59,10 @@ logger.setLevel(logging.ERROR)
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_search(client, message):
+    # Premium movie check
+query = message.text.strip()
+if await check_premium_movie(query, message):
+    return  # agar premium hai to normal search skip
     await mdb.update_top_messages(message.from_user.id, message.text)
     bot_id = client.me.id
     user_id = message.from_user.id
