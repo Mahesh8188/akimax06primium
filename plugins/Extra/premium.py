@@ -20,7 +20,7 @@ premium_col = db["premium_movies"]
 FIXED_POSTER = "https://envs.sh/i6E.jpg"
 
 # === Command: Set Premium Movie ===
-@Client.on_message(filters.command("setpremium") & filters.user([ADMINS]))  # admin id daalna
+@Client.on_message(filters.command("setpremium") & filters.user(ADMINS))  # admin id daalna
 async def set_premium_movie(client, message):
     args = message.text.split(" ", 1)
     if len(args) < 2:
@@ -38,7 +38,7 @@ async def set_premium_movie(client, message):
 
 
 # === Command: Remove Premium Movie ===
-@Client.on_message(filters.command("removepremium") & filters.user([ADMINS]))
+@Client.on_message(filters.command("removepremium") & filters.user(ADMINS))
 async def remove_premium_movie(client, message):
     args = message.text.split(" ", 1)
     if len(args) < 2:
