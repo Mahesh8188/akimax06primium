@@ -5,6 +5,7 @@ import random
 import asyncio
 import string
 import pytz
+from bot import JisshuBot as app
 from pyrogram import filters
 from datetime import datetime as dt
 from Script import script
@@ -1562,4 +1563,5 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
 
