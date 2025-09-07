@@ -46,32 +46,64 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
+from pyrogram import filters
+from pyrogram.types import ChatMemberUpdated
+
+# =========================
+# Allowed groups load/save
+# =========================
 def load_allowed_groups():
     try:
-        with open("allowed_groups.json", "r") as f:
-            return json.load(f)
-    except:
+        with open("allowed_groups.txt", "r") as f:
+            return [int(x.strip()) for x in f.readlines()]
+    except FileNotFoundError:
         return []
 
 def save_allowed_groups(groups):
-    with open("allowed_groups.json", "w") as f:
-        json.dump(groups, f)
+    with open("allowed_groups.txt", "w") as f:
+        for g in groups:
+            f.write(f"{g}\n")
 
+# =========================
+# /allow command (owner only)
+# =========================
+
+
+# =========================
+# Event 1: on_chat_member_updated
+# =========================
 @JisshuBot.on_chat_member_updated()
 async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
-    chat = chat_member_update.chat
-    new_status = chat_member_update.new_chat_member.status
-    old_status = chat_member_update.old_chat_member.status
-
-    if old_status in ("left", "kicked") and new_status in ("member", "administrator"):
-        chat_id = chat.id
-        groups = load_allowed_groups()
-        if chat_id not in groups:
-            try:
+    try:
+        if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
+            chat_id = chat_member_update.chat.id
+            groups = load_allowed_groups()
+            if chat_id not in groups:
                 await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
                 await client.leave_chat(chat_id)
-            except Exception as e:
-                print(f"Error: {e}")
+            else:
+                await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in on_chat_member_updated: {e}")
+
+# =========================
+# Event 2: new_chat_members (Fallback)
+# =========================
+@JisshuBot.on_message(filters.new_chat_members)
+async def when_added(client, message):
+    try:
+        for user in message.new_chat_members:
+            if user.id == client.me.id:  # Bot khud add hua hai
+                chat_id = message.chat.id
+                groups = load_allowed_groups()
+                if chat_id not in groups:
+                    await message.reply("Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                    await client.leave_chat(chat_id)
+                else:
+                    await message.reply("✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in when_added: {e}")
+
                 
 async def Jisshu_start():
     print("\n")
@@ -123,21 +155,6 @@ async def Jisshu_start():
     await web.TCPSite(app, bind_address, PORT).start()
     await idle()
 
-@JisshuBot.on_chat_member_updated()
-async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
-    # Bot khud add hua hai kya check karo
-    if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
-        chat_id = chat_member_update.chat.id
-        groups = load_allowed_groups()
-        if chat_id not in groups:
-            try:
-                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
-                await client.leave_chat(chat_id)
-            except Exception as e:
-                print(f"Error: {e}")
-        else:
-            await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
-        
 
 if __name__ == "__main__":
     try:
