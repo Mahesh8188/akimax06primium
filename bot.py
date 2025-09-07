@@ -43,44 +43,75 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
-from pyrogram import Client, filters
+from pyrogram import filters
 from pyrogram.types import ChatMemberUpdated
 
+# =========================
+# Allowed groups load/save
+# =========================
+def load_allowed_groups():
+    try:
+        with open("allowed_groups.txt", "r") as f:
+            return [int(x.strip()) for x in f.readlines()]
+    except FileNotFoundError:
+        return []
+
+def save_allowed_groups(groups):
+    with open("allowed_groups.txt", "w") as f:
+        for g in groups:
+            f.write(f"{g}\n")
 
 # =========================
-# Event 1: Chat Member Updated (Bot Added/Removed)
+# /allow command (owner only)
+# =========================
+OWNER_ID = 6859451629  # <- apna telegram id daalna
+
+@JisshuBot.on_message(filters.command("allow") & filters.user(OWNER_ID))
+async def allow_group(client, message):
+    groups = load_allowed_groups()
+    chat_id = message.chat.id
+    if chat_id not in groups:
+        groups.append(chat_id)
+        save_allowed_groups(groups)
+        await message.reply("✅ This group is now allowed for the bot.")
+    else:
+        await message.reply("⚠️ Ye group already allowed hai.")
+
+# =========================
+# Event 1: on_chat_member_updated
 # =========================
 @JisshuBot.on_chat_member_updated()
 async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
-    try:
-        if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
-            chat_id = chat_member_update.chat.id
-            groups = load_allowed_groups()
-            if chat_id not in groups:
-                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
-                await client.leave_chat(chat_id)
-            else:
-                await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
-    except Exception as e:
-        print(f"Error in on_chat_member_updated: {e}")
+    try:
+        if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
+            chat_id = chat_member_update.chat.id
+            groups = load_allowed_groups()
+            if chat_id not in groups:
+                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                await client.leave_chat(chat_id)
+            else:
+                await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in on_chat_member_updated: {e}")
 
 # =========================
 # Event 2: new_chat_members (Fallback)
 # =========================
 @JisshuBot.on_message(filters.new_chat_members)
 async def when_added(client, message):
-    try:
-        for user in message.new_chat_members:
-            if user.id == client.me.id:  # Bot khud add hua hai
-                chat_id = message.chat.id
-                groups = load_allowed_groups()
-                if chat_id not in groups:
-                    await message.reply("Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
-                    await client.leave_chat(chat_id)
-                else:
-                    await message.reply("✅ Bot is ready in this allowed group!")
-    except Exception as e:
-        print(f"Error in when_added: {e}")
+    try:
+        for user in message.new_chat_members:
+            if user.id == client.me.id:  # Bot khud add hua hai
+                chat_id = message.chat.id
+                groups = load_allowed_groups()
+                if chat_id not in groups:
+                    await message.reply("Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                    await client.leave_chat(chat_id)
+                else:
+                    await message.reply("✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in when_added: {e}")
+
 
 async def Jisshu_start():
     print("\n")
