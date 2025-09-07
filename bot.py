@@ -43,6 +43,66 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
+from pyrogram import Client, filters
+from pyrogram.types import ChatMemberUpdated
+
+
+# =========================
+# Event 1: Chat Member Updated (Bot Added/Removed)
+# =========================
+@Client.on_chat_member_updated()
+async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
+    try:
+        if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
+            chat_id = chat_member_update.chat.id
+            adder_id = chat_member_update.from_user.id if chat_member_update.from_user else None
+
+            groups = load_allowed_groups()
+
+            # ✅ Agar OWNER ne add kiya hai to allow
+            if adder_id == OWNER_ID:
+                await client.send_message(chat_id, "✅ Bot owner ne mujhe add kiya hai. Main yaha rahunga!")
+                if chat_id not in groups:
+                    groups.append(chat_id)
+                    save_allowed_groups(groups)
+            else:
+                if chat_id not in groups:
+                    await client.send_message(chat_id, "🚫 Suno Group ke Logo, is group ka owner bawasir hai... asli AK IMAX join karo @akimax06")
+                    await client.leave_chat(chat_id)
+                else:
+                    await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in on_chat_member_updated: {e}")
+
+# =========================
+# Event 2: New Chat Members (Fallback)
+# =========================
+@Client.on_message(filters.new_chat_members)
+async def when_added(client, message):
+    try:
+        for user in message.new_chat_members:
+            if user.id == client.me.id:  # Bot khud add hua hai
+                chat_id = message.chat.id
+                adder_id = message.from_user.id if message.from_user else None
+
+                groups = load_allowed_groups()
+
+                # ✅ Agar OWNER ne add kiya hai to allow
+                if adder_id == OWNER_ID:
+                    await message.reply("✅ Bot owner ne mujhe add kiya hai. Main yaha rahunga!")
+                    if chat_id not in groups:
+                        groups.append(chat_id)
+                        save_allowed_groups(groups)
+                else:
+                    if chat_id not in groups:
+                        await message.reply("🚫 Suno Group ke Logo, is group ka owner bawasir hai... asli AK IMAX join karo @akimax06")
+                        await client.leave_chat(chat_id)
+                    else:
+                        await message.reply("✅ Bot is ready in this allowed group!")
+    except Exception as e:
+        print(f"Error in when_added: {e}")
+
+
 async def Jisshu_start():
     print("\n")
     print("Credit - Telegram @JISSHU_BOTS")
