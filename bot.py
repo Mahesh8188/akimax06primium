@@ -127,7 +127,7 @@ async def when_added(client, message):
 
                 # normal user add kare
                 if chat_id not in groups:
-                    await message.reply("𝗦𝘂𝗻𝗼 𝗚𝗿𝗼𝘂𝗽 𝗸𝗲 𝗟𝗼𝗴𝗼 𝗜𝘀 𝗚𝗿𝗼𝘂𝗽 𝗞𝗮 𝗢𝘄𝗻𝗲𝗿 𝗕𝗵𝗲𝗻 𝗸𝗮 𝗟𝗼𝗱𝗮 𝗵𝗮𝗶... 𝗔𝘀𝗹𝗶 𝗔𝗞 𝗜𝗠𝗔𝗫 𝗝𝗼𝗶𝗻 𝗸𝗿𝗼 @akimax06
+                    await message.reply("𝗦𝘂𝗻𝗼 𝗚𝗿𝗼𝘂𝗽 𝗸𝗲 𝗟𝗼𝗴𝗼 𝗜𝘀 𝗚𝗿𝗼𝘂𝗽 𝗞𝗮 𝗢𝘄𝗻𝗲𝗿 𝗕𝗵𝗲𝗻 𝗸𝗮 𝗟𝗼𝗱𝗮 𝗵𝗮𝗶... 𝗔𝘀𝗹𝗶 𝗔𝗞 𝗜𝗠𝗔𝗫 𝗝𝗼𝗶𝗻 𝗸𝗿𝗼 @akimax06")
                     await client.leave_chat(chat_id)
                 else:
                     await message.reply("✅ Bot is ready in this allowed group!")
