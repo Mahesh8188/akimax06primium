@@ -7,66 +7,6 @@ from database.users_chats_db import db
 from pyrogram import Client, filters
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram import Client, filters
-from pymongo import MongoClient
-
-# === MongoDB Setup ===
-MONGO_URL = "mongodb+srv://devashibambhava0:devashibambhava0@cluster0.ux6amy9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-mongo_client = MongoClient(MONGO_URL)
-db = mongo_client["Cluster0"]   # <-- yaha apna user DB daalna
-premium_col = db["premium_movies"]
-
-# Fixed poster (aap apna link daalo yaha 👇)
-FIXED_POSTER = "https://envs.sh/i6E.jpg"
-
-# === Command: Set Premium Movie ===
-@Client.on_message(filters.command("setpremium") & filters.user(ADMINS))  # admin id daalna
-async def set_premium_movie(client, message):
-    args = message.text.split(" ", 1)
-    if len(args) < 2:
-        return await message.reply("⚠ Usage: `/setpremium <movie_name>`")
-
-    movie_name = args[1].strip()
-
-    premium_col.update_one(
-        {"movie_name": movie_name},
-        {"$set": {"movie_name": movie_name}},
-        upsert=True
-    )
-
-    await message.reply(f"✅ **{movie_name}** ko Premium list me add kar diya gaya hai.")
-
-
-# === Command: Remove Premium Movie ===
-@Client.on_message(filters.command("removepremium") & filters.user(ADMINS))
-async def remove_premium_movie(client, message):
-    args = message.text.split(" ", 1)
-    if len(args) < 2:
-        return await message.reply("⚠ Usage: `/removepremium <movie_name>`")
-
-    movie_name = args[1].strip()
-
-    result = premium_col.delete_one({"movie_name": movie_name})
-    if result.deleted_count > 0:
-        await message.reply(f"🗑 **{movie_name}** Premium se hata diya gaya.")
-    else:
-        await message.reply(f"⚠ **{movie_name}** Premium list me nahi mila.")
-
-
-# === Function: Check Premium Movie ===
-async def check_premium_movie(movie_name, message):
-    movie = premium_col.find_one({"movie_name": {"$regex": f"^{movie_name}$", "$options": "i"}})
-    if movie:
-        await message.reply_photo(
-            photo=FIXED_POSTER,
-            caption=f"🎬 **{movie['movie_name']}** Premium me available hai!\n\n👉 Access ke liye Premium join kare.",
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("🔥 Join Premium", url="https://your-premium-link.com")]]
-            )
-        )
-        return True
-    return False
-    
 
 @Client.on_message(filters.command("add_premium"))
 async def give_premium_cmd_handler(client, message):
