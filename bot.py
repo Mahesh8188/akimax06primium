@@ -43,7 +43,7 @@ loop = asyncio.get_event_loop()
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 
-from pyrogram import filters
+from pyrogram import filters, Client
 from pyrogram.types import ChatMemberUpdated
 
 # =========================
@@ -52,7 +52,7 @@ from pyrogram.types import ChatMemberUpdated
 def load_allowed_groups():
     try:
         with open("allowed_groups.txt", "r") as f:
-            return [int(x.strip()) for x in f.readlines()]
+            return [x.strip() for x in f.readlines()]  # string return karo
     except FileNotFoundError:
         return []
 
@@ -64,12 +64,12 @@ def save_allowed_groups(groups):
 # =========================
 # /allow command (owner only)
 # =========================
-OWNER_ID = 6859451629  # <- apna telegram id daalna
+OWNER_ID = 6859451629  # apna telegram id
 
 @JisshuBot.on_message(filters.command("allow") & filters.user(OWNER_ID))
 async def allow_group(client, message):
     groups = load_allowed_groups()
-    chat_id = message.chat.id
+    chat_id = str(message.chat.id)  # string me convert karo
     if chat_id not in groups:
         groups.append(chat_id)
         save_allowed_groups(groups)
@@ -84,10 +84,21 @@ async def allow_group(client, message):
 async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
     try:
         if chat_member_update.new_chat_member and chat_member_update.new_chat_member.user.id == client.me.id:
-            chat_id = chat_member_update.chat.id
+            chat_id = str(chat_member_update.chat.id)  # string me convert
+            adder_id = chat_member_update.from_user.id if chat_member_update.from_user else None
             groups = load_allowed_groups()
+
+            # agar owner ne add kiya hai → force allow
+            if adder_id == OWNER_ID:
+                if chat_id not in groups:
+                    groups.append(chat_id)
+                    save_allowed_groups(groups)
+                await client.send_message(chat_id, "✅ Owner ne mujhe add kiya hai. Main yaha rahunga!")
+                return
+
+            # normal user add kare to allow check
             if chat_id not in groups:
-                await client.send_message(chat_id, "Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                await client.send_message(chat_id, "𝗦𝘂𝗻𝗼 𝗚𝗿𝗼𝘂𝗽 𝗸𝗲 𝗟𝗼𝗴𝗼 𝗜𝘀 𝗚𝗿𝗼𝘂𝗽 𝗞𝗮 𝗢𝘄𝗻𝗲𝗿 𝗕𝗵𝗲𝗻 𝗸𝗮 𝗟𝗼𝗱𝗮 𝗵𝗮𝗶... 𝗔𝘀𝗹𝗶 𝗔𝗞 𝗜𝗠𝗔𝗫 𝗝𝗼𝗶𝗻 𝗸𝗿𝗼 @akimax06")
                 await client.leave_chat(chat_id)
             else:
                 await client.send_message(chat_id, "✅ Bot is ready in this allowed group!")
@@ -101,16 +112,28 @@ async def on_bot_added(client, chat_member_update: ChatMemberUpdated):
 async def when_added(client, message):
     try:
         for user in message.new_chat_members:
-            if user.id == client.me.id:  # Bot khud add hua hai
-                chat_id = message.chat.id
+            if user.id == client.me.id:  # bot khud add hua hai
+                chat_id = str(message.chat.id)  # string me convert
+                adder_id = message.from_user.id if message.from_user else None
                 groups = load_allowed_groups()
+
+                # owner add kare → force allow
+                if adder_id == OWNER_ID:
+                    if chat_id not in groups:
+                        groups.append(chat_id)
+                        save_allowed_groups(groups)
+                    await message.reply("✅ Owner ne add kiya hai. Main yaha rahunga!")
+                    return
+
+                # normal user add kare
                 if chat_id not in groups:
-                    await message.reply("Suno Group ke Logo Is Group Ka Owner Bhen ka Loda hai... Asli AK IMAX Join kro @akimax06")
+                    await message.reply("𝗦𝘂𝗻𝗼 𝗚𝗿𝗼𝘂𝗽 𝗸𝗲 𝗟𝗼𝗴𝗼 𝗜𝘀 𝗚𝗿𝗼𝘂𝗽 𝗞𝗮 𝗢𝘄𝗻𝗲𝗿 𝗕𝗵𝗲𝗻 𝗸𝗮 𝗟𝗼𝗱𝗮 𝗵𝗮𝗶... 𝗔𝘀𝗹𝗶 𝗔𝗞 𝗜𝗠𝗔𝗫 𝗝𝗼𝗶𝗻 𝗸𝗿𝗼 @akimax06
                     await client.leave_chat(chat_id)
                 else:
                     await message.reply("✅ Bot is ready in this allowed group!")
     except Exception as e:
         print(f"Error in when_added: {e}")
+
 
 
 async def Jisshu_start():
