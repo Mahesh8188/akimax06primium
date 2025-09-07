@@ -21,6 +21,7 @@ API_HASH = environ.get("API_HASH", "7c5af0b88c33d2f5cce8df5d82eb2a94")
 BOT_TOKEN = environ.get("BOT_TOKEN", "")
 PORT = environ.get("PORT", "8082")
 
+OWNER_ID = 6859451629    # yaha apna Telegram ID daalna
 # Owners
 ADMINS = [
     int(admin) if id_pattern.search(admin) else admin
