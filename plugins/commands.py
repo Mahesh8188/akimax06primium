@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 movie_series_db = JsTopDB(DATABASE_URI)
 verification_ids = {}
 
-@Client.on_message(filters.command("allow") & filters.user(OWNER_ID))
+@JisshuBot.on_message(filters.command("allow") & filters.user(OWNER_ID))
 async def allow_group(client, message):
     groups = load_allowed_groups()
     chat_id = message.chat.id
@@ -1559,6 +1559,7 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
 
 
 
