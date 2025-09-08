@@ -140,7 +140,7 @@ PAYPICS = (
     environ.get("PAYPICS", "https://envs.sh/tYV.jpg")
 ).split()
 SUBSCRIPTION = environ.get(
-    "SUBSCRIPTION", "https://envs.sh/bEL.jpg"
+    "SUBSCRIPTION", "https://envs.sh/bQE.jpg"
 )
 REACTIONS = ["👀", "😱", "🔥", "😍", "🎉", "🥰", "😇", "⚡"]
 
