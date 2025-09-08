@@ -176,25 +176,12 @@ async def start(client: Client, message):
         )
     if len(message.command) != 2:
         buttons = [
+            
             [
-                InlineKeyboardButton(
-                    "⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇋",
-                    url=f"http://telegram.dog/{temp.U_NAME}?startgroup=start",
-                )
+                InlineKeyboardButton("• 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕 •", callback_data="https://t.me/akimax_06")
+                
             ],
-            [
-                InlineKeyboardButton("• ᴅɪꜱᴀʙʟᴇ ᴀᴅꜱ •", callback_data="jisshupremium"),
-                InlineKeyboardButton("• ꜱᴘᴇᴄɪᴀʟ •", callback_data="special"),
-            ],
-            [
-                InlineKeyboardButton("• ʜᴇʟᴘ •", callback_data="help"),
-                InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="about"),
-            ],
-            [
-                InlineKeyboardButton(
-                    "• ᴇᴀʀɴ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏɴᴇʏ ᴡɪᴛʜ ʙᴏᴛ •", callback_data="earn"
-                )
-            ],
+            
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
         m = await message.reply_sticker(
@@ -218,25 +205,12 @@ async def start(client: Client, message):
         "help",
     ]:
         buttons = [
+            
             [
-                InlineKeyboardButton(
-                    "⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇋",
-                    url=f"http://telegram.dog/{temp.U_NAME}?startgroup=start",
-                )
+                InlineKeyboardButton("• 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕•", callback_data="https://t.me/akimax_06")
+                
             ],
-            [
-                InlineKeyboardButton("• ᴅɪꜱᴀʙʟᴇ ᴀᴅꜱ •", callback_data="jisshupremium"),
-                InlineKeyboardButton("• ꜱᴘᴇᴄɪᴀʟ •", callback_data="special"),
-            ],
-            [
-                InlineKeyboardButton("• ʜᴇʟᴘ •", callback_data="help"),
-                InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="about"),
-            ],
-            [
-                InlineKeyboardButton(
-                    "• ᴇᴀʀɴ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏɴᴇʏ ᴡɪᴛʜ ʙᴏᴛ •", callback_data="earn"
-                )
-            ],
+            
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
         return await message.reply_photo(
@@ -1571,6 +1545,7 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
 
 
 
