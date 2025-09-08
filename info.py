@@ -50,7 +50,7 @@ DATABASE_URI = environ.get("DATABASE_URI", "mongodb+srv://akimax8182:akimax8182@
 DATABASE_NAME = environ.get("DATABASE_NAME", "Cluster0")
 
 # Files index database url
-FILES_DATABASE = environ.get("FILES_DATABASE", "mongodb+srv://crazygaming4694:crazygaming4694@cluster0.v77dv.mongodb.net/?retryWrites=true&w=majority")
+FILES_DATABASE = environ.get("FILES_DATABASE", "mongodb+srv://bharvadboy747:bharvadboy747@cluster0.ru582.mongodb.net/?retryWrites=true&w=majority")
 COLLECTION_NAME = environ.get("COLLECTION_NAME", "lazyfilesx")
 
 # Other Channel's
