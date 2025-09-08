@@ -158,19 +158,7 @@ async def check_expired():
 # --------------------
 # Start Bot
 # --------------------
-@JisshuBot.on_message(filters.command("start"))
-async def start(_, message):
-    await message.reply("🤖 Bot is alive!\nUse /add & /members")
 
-async def main():
-    asyncio.create_task(check_expired())
-    await app.start()
-    print("✅ Bot is running...")
-    await idle()
-
-if __name__ == "__main__":
-    from pyrogram import idle
-    asyncio.run(main())
     
 
 # =========================
