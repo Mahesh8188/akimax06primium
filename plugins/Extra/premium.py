@@ -210,7 +210,7 @@ async def plan(client, message):
         [InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")],
     ]
     await message.reply_photo(
-        photo="https://graph.org/file/55a5392f88ec5a4bd3379.jpg",
+        photo="https://envs.sh/bEL.jpg",
         caption=script.PREPLANS_TXT.format(message.from_user.mention),
         reply_markup=InlineKeyboardMarkup(btn),
     )
