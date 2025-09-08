@@ -58,7 +58,7 @@ from pyrogram.types import ChatMemberUpdated
 # Bot & DB Setup
 # --------------------
 app = Client("merged-bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-mongo_client = AsyncIOMotorClient(MONGO_URI)
+mongo_client = AsyncIOMotorClient(DATABASE_URI)
 db = mongo_client["timed_group_bot"]
 members_col = db["members"]
 
@@ -158,7 +158,19 @@ async def check_expired():
 # --------------------
 # Start Bot
 # --------------------
+@JisshuBot.on_message(filters.command("start"))
+async def start(_, message):
+    await message.reply("🤖 Bot is alive!\nUse /add & /members")
 
+async def main():
+    asyncio.create_task(check_expired())
+    await app.start()
+    print("✅ Bot is running...")
+    await idle()
+
+if __name__ == "__main__":
+    from pyrogram import idle
+    asyncio.run(main())
     
 
 # =========================
