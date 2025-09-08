@@ -178,7 +178,7 @@ async def start(client: Client, message):
         buttons = [
             
             [
-                InlineKeyboardButton("• 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕 •", callback_data="https://t.me/akimax_06")
+                InlineKeyboardButton(" 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕 ", url=f"https://t.me/akimax_06")
                 
             ],
             
@@ -207,7 +207,7 @@ async def start(client: Client, message):
         buttons = [
             
             [
-                InlineKeyboardButton("• 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕•", callback_data="https://t.me/akimax_06")
+                InlineKeyboardButton(" 𝚓𝚘𝚒𝚗 𝚞𝚙𝚍𝚊𝚝𝚎𝚜 𝚌𝚑𝚊𝚗𝚗𝚎𝚕 ", url=f"https://t.me/akimax_06")
                 
             ],
             
@@ -1545,6 +1545,7 @@ async def reset_group_command(client, message):
     reply_markup = InlineKeyboardMarkup(btn)
     await save_default_settings(grp_id)
     await message.reply_text("ꜱᴜᴄᴄᴇꜱꜱғᴜʟʟʏ ʀᴇꜱᴇᴛ ɢʀᴏᴜᴘ ꜱᴇᴛᴛɪɴɢꜱ...")
+
 
 
 
