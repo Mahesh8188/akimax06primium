@@ -134,7 +134,7 @@ START_IMG = (
         "https://envs.sh/bE0.jpg",
     )
 ).split()
-FORCESUB_IMG = environ.get("FORCESUB_IMG", "https://envs.sh/bES.jpg")
+FORCESUB_IMG = environ.get("FORCESUB_IMG", "https://envs.sh/bEB.jpg")
 REFER_PICS = (environ.get("REFER_PICS", "https://envs.sh/PSI.jpg")).split()
 PAYPICS = (
     environ.get("PAYPICS", "https://envs.sh/tYV.jpg")
