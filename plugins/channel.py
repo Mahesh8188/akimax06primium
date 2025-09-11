@@ -82,7 +82,7 @@ async def send_movie_updates(bot, file_name, caption, file_id):
         btn = [[
             InlineKeyboardButton('📂 ᴅᴏᴡɴʟᴏᴀᴅ 📂', url=f'https://t.me/{temp.U_NAME}?start=file_0_{file_id}')
         ],[
-            InlineKeyboardButton('♻️ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ♻️', url=f'https://www.youtube.com/@ak_imax_03')
+            InlineKeyboardButton('♻️ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ♻️', url=f'https://t.me/akimax_06/364')
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
         if poster_url:
@@ -97,5 +97,6 @@ async def send_movie_updates(bot, file_name, caption, file_id):
         await bot.send_message(LOG_CHANNEL, f'Failed to send movie update. Error - {e}')
     
   
+
 
 
