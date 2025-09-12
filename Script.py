@@ -247,34 +247,44 @@ User - {}"""
 
     PREPLANS_TXT = """<b>👋 ʜᴇʏ {},
 
-<blockquote>🎁 ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇ ʙᴇɴɪꜰɪᴛꜱ:</blockquote>
+♔  Premium Plans♔
 
-❏ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
-❏ ɢᴇᴛ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
-❏ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-❏ ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
-❏ ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
-❏ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs ᴀɴᴅ sᴇʀɪᴇs                                                                        
-❏ ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
-❏ ʀᴇǫᴜᴇsᴛ ᴡɪʟʟ ʙᴇ ᴄᴏᴍᴘʟᴇᴛᴇᴅ ɪɴ 𝟷ʜ [ ɪꜰ ᴀᴠᴀɪʟᴀʙʟᴇ ]
+❖ 1 Week Plan  20Rs(1 Time only)
+❖ 1 Month Plan  69Rs
+❖ 3 Month Plan  179Rs
+❖ 6 Month Plan  299Rs
+❖ 1 year Plan  549Rs
 
-⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan
+❝Porn Plan Free With 1 Year Plan❞
+
+✤ Must Read  <a href='https://telegra.ph/IMAX-PREMIUM-Terms--Conditions-09-08-2'>T&C</a> /  <a href='https://telegra.ph/AKIMAX-PREMIUM-BENEFITS-09-08'>Benefits</a>
+
+Pay 》: /pay
+
+⚠️Note : AKiMax Ke Naam Pe Koi Bhi Apko DM Kre To Usko Turant Block Kare Aise Logo Se Savdhaan Rahe..
+
+Team ● AKIMAX 🍷
 </b>"""
 
     PREPLANSS_TXT = """<b>👋 ʜᴇʏ {}
     
-<blockquote>🎁 ᴘʀᴇᴍɪᴜᴍ ғᴇᴀᴛᴜʀᴇ ʙᴇɴɪꜰɪᴛꜱ:</blockquote>
+♔  Premium Plans♔
 
-❏ ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴏᴘᴇɴ ʟɪɴᴋꜱ
-❏ ɢᴇᴛ ᴅɪʀᴇᴄᴛ ғɪʟᴇs   
-❏ ᴀᴅ-ғʀᴇᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ 
-❏ ʜɪɢʜ-sᴘᴇᴇᴅ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ                         
-❏ ᴍᴜʟᴛɪ-ᴘʟᴀʏᴇʀ sᴛʀᴇᴀᴍɪɴɢ ʟɪɴᴋs                           
-❏ ᴜɴʟɪᴍɪᴛᴇᴅ ᴍᴏᴠɪᴇs ᴀɴᴅ sᴇʀɪᴇs                                                                        
-❏ ꜰᴜʟʟ ᴀᴅᴍɪɴ sᴜᴘᴘᴏʀᴛ                              
-❏ ʀᴇǫᴜᴇsᴛ ᴡɪʟʟ ʙᴇ ᴄᴏᴍᴘʟᴇᴛᴇᴅ ɪɴ 𝟷ʜ [ ɪꜰ ᴀᴠᴀɪʟᴀʙʟᴇ ]
+❖ 1 Week Plan  20Rs(1 Time only)
+❖ 1 Month Plan  69Rs
+❖ 3 Month Plan  179Rs
+❖ 6 Month Plan  299Rs
+❖ 1 year Plan  549Rs
 
-⛽️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ: /myplan
+❝Porn Plan Free With 1 Year Plan❞
+
+✤ Must Read  <a href='https://telegra.ph/IMAX-PREMIUM-Terms--Conditions-09-08-2'>T&C</a> /  <a href='https://telegra.ph/AKIMAX-PREMIUM-BENEFITS-09-08'>Benefits</a>
+
+Pay 》: /pay
+
+⚠️Note : AKiMax Ke Naam Pe Koi Bhi Apko DM Kre To Usko Turant Block Kare Aise Logo Se Savdhaan Rahe..
+
+Team ● AKIMAX 🍷
 </b>"""
 
     OTHER_TXT = """<b>👋 ʜᴇʏ {},
@@ -451,6 +461,7 @@ Aᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴀɴᴅ ᴍᴀᴋᴇ ᴍᴇ ᴀ�
 ʙʏ /details ᴄᴏᴍᴍᴀɴᴅ
 </blockquote>
 Iғ ʏᴏᴜ ʜᴀᴠᴇ ᴀɴʏ ᴅᴏᴜʙᴛs ᴘʟᴇᴀsᴇ <a href="https://telegram.dog/JisshuDeveloperBot">ᴄᴏɴᴛᴀᴄᴛ</a> ᴍʏ <a href="https://telegram.dog/im_jisshu">Z I Ƨ Ή Λ П ♡</a></b>"""
+
 
 
 
