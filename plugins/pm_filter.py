@@ -1394,7 +1394,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🍁 ᴄʜᴇᴄᴋ ᴀʟʟ ᴘʟᴀɴꜱ & ᴘʀɪᴄᴇꜱ 🍁", callback_data="free"
+                    "🍁 Join Primium  🍁", url=f"https://t.me/akimax06primium"
                 )
             ],
             [InlineKeyboardButton("⪻ ʙᴀᴄᴋ ᴛᴏ ʜᴏᴍᴇ", callback_data="start")],
@@ -1413,7 +1413,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🍁 ᴄʜᴇᴄᴋ ᴀʟʟ ᴘʟᴀɴꜱ & ᴘʀɪᴄᴇꜱ 🍁", callback_data="free"
+                    "🍁 Join Primium  🍁", url=f"https://t.me/akimax06primium"
                 )
             ],
             [InlineKeyboardButton("• 𝗖𝗹𝗼𝘀𝗲 •", callback_data="close_data")],
